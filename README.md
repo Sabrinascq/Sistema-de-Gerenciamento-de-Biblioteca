@@ -15,7 +15,7 @@
 - Swagger (Documentação)
 
 ## Passo a Passo para Instalação e Execução
-1. Clone o repositório: `git clone []`
+1. Clone o repositório: `git clone [https://github.com/Sabrinascq/Sistema-de-Gerenciamento-de-Biblioteca.git]`
 2. Acesse a pasta do projeto: `cd sistema-de-gerenciamento-de-biblioteca`
 3. Instale as dependências: `npm install`
 4. Configure o arquivo `.env` com as credenciais do seu banco de dados.
