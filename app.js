@@ -4,6 +4,8 @@ const cors = require('cors');
 const sequelize = require('./config/database');
 const authRoutes = require('./routes/authRoutes');
 const livroRoutes = require('./routes/livroRoutes');
+const leitorRoutes = require('./routes/leitorRoutes');
+const emprestimoRoutes = require('./routes/emprestimoRoutes');
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -11,6 +13,8 @@ app.use(express.json());
 // Rotas da Aplicação
 app.use('/api/auth', authRoutes);
 app.use('/api/livros', livroRoutes);
+app.use('/api/leitores', leitorRoutes);
+app.use('/api/emprestimos', emprestimoRoutes);
 
 app.get('/', (req, res) => {
   res.send('API da Biblioteca Rodando!');
