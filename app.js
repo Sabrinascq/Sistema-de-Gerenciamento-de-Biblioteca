@@ -3,14 +3,14 @@ const express = require('express');
 const cors = require('cors');
 const sequelize = require('./config/database');
 const authRoutes = require('./routes/authRoutes');
-const bookRoutes = require('./routes/bookRoutes');
+const livroRoutes = require('./routes/livroRoutes');
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 // Rotas da Aplicação
 app.use('/api/auth', authRoutes);
-app.use('/api/books', bookRoutes);
+app.use('/api/livros', livroRoutes);
 
 app.get('/', (req, res) => {
   res.send('API da Biblioteca Rodando!');

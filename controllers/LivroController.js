@@ -1,6 +1,6 @@
 const Livro = require('../models/Livro');
 
-const BookController = {
+const LivroController = {
   // Função para cadastrar um novo livro
   create: async (req, res) => {
     try {
@@ -35,4 +35,4 @@ const BookController = {
   }
 };
 
-module.exports = BookController;
+module.exports = LivroController;
