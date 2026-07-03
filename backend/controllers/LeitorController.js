@@ -160,6 +160,34 @@ const LeitorController = {
   },
 
   // ==========================
+  // Reativar Leitor
+  // ==========================
+  reativar: async (req, res) => {
+    try {
+      const leitor = await Leitor.findByPk(req.params.id);
+
+      if (!leitor) {
+        return res.status(404).json({
+          erro: 'Leitor não encontrado.'
+        });
+      }
+
+      await leitor.update({
+        status: 'ativo'
+      });
+
+      return res.json({
+        mensagem: 'Leitor reativado com sucesso.'
+      });
+
+    } catch (error) {
+      return res.status(500).json({
+        erro: error.message
+      });
+    }
+  },
+
+  // ==========================
   // Buscar por Nome ou CPF
   // ==========================
   search: async (req, res) => {

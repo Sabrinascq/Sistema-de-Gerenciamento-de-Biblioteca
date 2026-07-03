@@ -54,4 +54,10 @@ router.patch(
   LeitorController.inativar
 );
 
+router.patch(
+  '/:id/reativar',
+  auth(['Administrador']),
+  LeitorController.reativar
+);
+
 module.exports = router;

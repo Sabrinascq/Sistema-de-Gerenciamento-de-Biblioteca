@@ -15,8 +15,12 @@ function Leitores() {
   useEffect(() => { carregarLeitores(); }, []);
 
   const carregarLeitores = async () => {
-    const resposta = await api.get('/leitores');
-    setLeitores(resposta.data);
+    try {
+      const resposta = await api.get('/leitores');
+      setLeitores(resposta.data);
+    } catch (error) {
+      console.error("Erro ao carregar leitores", error);
+    }
   };
 
   const buscarLeitores = async () => {
@@ -38,8 +42,10 @@ function Leitores() {
     try {
       if (editandoId) {
         await api.put(`/leitores/${editandoId}`, formLeitor);
+        alert('Leitor atualizado com sucesso!');
       } else {
         await api.post('/leitores', formLeitor);
+        alert('Leitor cadastrado com sucesso!');
       }
       setMostrarForm(false);
       setEditandoId(null);
@@ -57,9 +63,27 @@ function Leitores() {
   };
 
   const handleInativar = async (id) => {
-    if (window.confirm('Deseja inativar este leitor?')) {
-      await api.patch(`/leitores/${id}/inativar`);
-      carregarLeitores();
+    if (window.confirm('Deseja inativar este leitor? O histórico de empréstimos será mantido.')) {
+      try {
+        await api.patch(`/leitores/${id}/inativar`);
+        carregarLeitores();
+      } catch (error) {
+        alert(error.response?.data?.erro || 'Erro ao inativar leitor.');
+      }
+    }
+  };
+
+  // ==========================
+  // Reativar Leitor
+  // ==========================
+  const handleReativar = async (id) => {
+    if (window.confirm('Deseja reativar o acesso deste leitor?')) {
+      try {
+        await api.patch(`/leitores/${id}/reativar`);
+        carregarLeitores();
+      } catch (error) {
+        alert(error.response?.data?.erro || 'Erro ao reativar leitor.');
+      }
     }
   };
 
@@ -158,8 +182,14 @@ function Leitores() {
                     {podeGerenciar && (
                       <td className="text-end pe-4">
                         <button className="btn btn-sm btn-warning me-2 text-dark fw-semibold" onClick={() => prepararEdicao(leitor)}>Editar</button>
+                        
+                        {/* Botões Dinâmicos: Mostra Inativar ou Reativar dependendo do status */}
                         {podeInativar && leitor.status === 'ativo' && (
                           <button className="btn btn-sm btn-outline-danger fw-semibold" onClick={() => handleInativar(leitor.id)}>Inativar</button>
+                        )}
+
+                        {podeInativar && leitor.status === 'inativo' && (
+                          <button className="btn btn-sm btn-outline-success fw-semibold" onClick={() => handleReativar(leitor.id)}>Reativar</button>
                         )}
                       </td>
                     )}
