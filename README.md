@@ -1,4 +1,4 @@
-**Tema do Projeto:** Sistema de Gerenciamento de Biblioteca
+## **Tema do Projeto:** Sistema de Gerenciamento de Biblioteca
 
 ## Integrantes da Equipe
 - Mauricio Albuquerque Christakis 
