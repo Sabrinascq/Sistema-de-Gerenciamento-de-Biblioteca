@@ -3,6 +3,7 @@
     "axios": "^1.18.1",
     "bcrypt": "^6.0.0",
     "react-router-dom": "^7.18.1",
+    "recharts": "^3.9.1",
     "swagger-jsdoc": "^6.3.0",
     "swagger-ui-express": "^5.0.1"
   }
