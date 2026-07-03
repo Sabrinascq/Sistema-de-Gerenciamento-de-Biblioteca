@@ -5,6 +5,7 @@ const auth = require('../middlewares/auth');
 
 // Apenas Administrador pode gerenciar usuários
 router.get('/', auth(['Administrador']), UsuarioController.getAll);
+router.post('/', auth(['Administrador']), UsuarioController.create);
 router.put('/:id', auth(['Administrador']), UsuarioController.update);
 router.delete('/:id', auth(['Administrador']), UsuarioController.delete);
 

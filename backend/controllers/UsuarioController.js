@@ -2,6 +2,53 @@ const User = require('../models/User');
 const bcrypt = require('bcrypt'); // Usado caso o admin queira mudar a senha de alguém
 
 const UsuarioController = {
+
+  // Criar um novo usuário
+  create: async (req, res) => {
+    try {
+      const { nome, email, senha, tipo } = req.body;
+
+      // 1. Validação básica
+      if (!nome || !email || !senha || !tipo) {
+        return res.status(400).json({ erro: 'Todos os campos são obrigatórios.' });
+      }
+
+      // 2. Valida se o tipo é permitido
+      if (!['Administrador', 'Bibliotecário', 'Leitor'].includes(tipo)) {
+        return res.status(400).json({ erro: 'Tipo de usuário inválido.' });
+      }
+
+      // 3. Verifica se o e-mail já está em uso
+      const usuarioExistente = await User.findOne({ where: { email } });
+      if (usuarioExistente) {
+        return res.status(400).json({ erro: 'Este e-mail já está cadastrado.' });
+      }
+
+      // 4. Criptografa a senha
+      const salt = await bcrypt.genSalt(10);
+      const senhaHash = await bcrypt.hash(senha, salt);
+
+      // 5. Salva no banco de dados
+      const novoUsuario = await User.create({
+        nome,
+        email,
+        senha: senhaHash,
+        tipo
+      });
+
+      // 6. Retorna sucesso (ocultando a senha)
+      const usuarioRetorno = novoUsuario.toJSON();
+      delete usuarioRetorno.senha;
+
+      return res.status(201).json({ 
+        mensagem: 'Usuário criado com sucesso!', 
+        usuario: usuarioRetorno 
+      });
+
+    } catch (error) {
+      return res.status(500).json({ erro: error.message });
+    }
+  },
   // Listar todos os usuários (Ocultando as senhas por segurança)
   getAll: async (req, res) => {
     try {

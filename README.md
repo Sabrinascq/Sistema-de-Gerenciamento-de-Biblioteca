@@ -22,7 +22,8 @@
 4. Inicie os containers do banco de dados, backend e frontend com o comando: docker-compose up --build
 5. Aguarde a finalização do terminal (os links ficarão azuis).
 6. Acesse a interface do sistema no navegador: http://localhost:5173
-7. (Opcional) Para encerrar a execução do sistema, abra um novo terminal na raiz do projeto e rode: docker-compose down
+7. Se as credenciais não estiverem funcionando para acessar, vá no Docker Desktop e dê um restart no backend
+8. (Opcional) Para encerrar a execução do sistema, abra um novo terminal na raiz do projeto e rode: docker-compose down
 
 ## Credenciais de Acesso
 - **Administrador:** [admin@email.com / 1234]
