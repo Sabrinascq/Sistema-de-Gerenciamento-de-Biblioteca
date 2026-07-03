@@ -1,6 +1,9 @@
 {
   "dependencies": {
     "axios": "^1.18.1",
-    "react-router-dom": "^7.18.1"
+    "bcrypt": "^6.0.0",
+    "react-router-dom": "^7.18.1",
+    "swagger-jsdoc": "^6.3.0",
+    "swagger-ui-express": "^5.0.1"
   }
 }
