@@ -163,68 +163,37 @@ const LeitorController = {
   // Buscar por Nome ou CPF
   // ==========================
   search: async (req, res) => {
-
     try {
-
-      const { nome, cpf } = req.query;
-
+      const { nome, cpf_ra } = req.query; // Corrigido para buscar cpf_ra[cite: 9]
       const where = {};
 
       if (nome) {
-
-        where.nome = {
-          [Op.iLike]: `%${nome}%`
-        };
-
+        where.nome = { [Op.iLike]: `%${nome}%` };
       }
 
-      if (cpf) {
-
-        where.cpf_ra = {
-          [Op.iLike]: `%${cpf}%`
-        };
-
+      if (cpf_ra) {
+        where.cpf_ra = { [Op.iLike]: `%${cpf_ra}%` };
       }
 
-      const leitores = await Leitor.findAll({
-        where
-      });
-
+      const leitores = await Leitor.findAll({ where });
       return res.json(leitores);
-
     } catch (error) {
-
-      return res.status(500).json({
-        erro: error.message
-      });
-
+      return res.status(500).json({ erro: error.message });
     }
-
   },
 
   // ==========================
   // Histórico
   // ==========================
   historico: async (req, res) => {
-
     try {
-
       const historico = await Emprestimo.findAll({
-        where: {
-          leitorId: req.params.id
-        }
+        where: { leitorId: req.params.id }
       });
-
       return res.json(historico);
-
     } catch (error) {
-
-      return res.status(500).json({
-        erro: error.message
-      });
-
+      return res.status(500).json({ erro: error.message });
     }
-
   }
 
 };

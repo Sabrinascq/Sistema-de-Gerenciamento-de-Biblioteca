@@ -1,5 +1,5 @@
-const Livro = require('../models/Livro');
 const { Op } = require('sequelize');
+const Livro = require('../models/Livro');
 
 const LivroController = {
 
@@ -191,57 +191,25 @@ const LivroController = {
   // Buscar Livros
   // ===========================
   search: async (req, res) => {
-
     try {
+      // Recebe o isbn da requisição
+      const { titulo, autor, categoria, status, isbn } = req.query;
+      let where = {};
 
-      const { titulo, autor, categoria, disponibilidade } = req.query;
+      if (titulo) where.titulo = { [Op.iLike]: `%${titulo}%` };
+      if (autor) where.autor = { [Op.iLike]: `%${autor}%` };
+      if (categoria) where.categoria = { [Op.iLike]: `%${categoria}%` };
+      
+      // Nova verificação para o ISBN
+      if (isbn) where.isbn = { [Op.iLike]: `%${isbn}%` };
+      
+      if (status) where.status = status;
 
-      const where = {};
-
-      if (titulo) {
-
-        where.titulo = {
-          [Op.iLike]: `%${titulo}%`
-        };
-
-      }
-
-      if (autor) {
-
-        where.autor = {
-          [Op.iLike]: `%${autor}%`
-        };
-
-      }
-
-      if (categoria) {
-
-        where.categoria = {
-          [Op.iLike]: `%${categoria}%`
-        };
-
-      }
-
-      if (disponibilidade) {
-
-        where.status = disponibilidade;
-
-      }
-
-      const livros = await Livro.findAll({
-        where
-      });
-
+      const livros = await Livro.findAll({ where });
       return res.json(livros);
-
     } catch (error) {
-
-      return res.status(500).json({
-        erro: error.message
-      });
-
+      return res.status(500).json({ erro: error.message });
     }
-
   }
 
 };

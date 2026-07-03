@@ -6,7 +6,7 @@ const sequelize = new Sequelize({
   dialect: 'postgres',
   host: process.env.DB_HOST || 'localhost',
   username: process.env.DB_USER || 'postgres',
-  password: 'software', 
+  password: process.env.DB_PASSWORD || 'software',
   database: process.env.DB_NAME || 'biblioteca_db',
   port: 5432, // Porta padrão do PostgreSQL
   logging: false,

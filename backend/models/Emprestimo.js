@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../backend/config/database');
+const sequelize = require('../config/database');
 const Leitor = require('./Leitor');
 const Livro = require('./Livro');
 
@@ -23,13 +23,16 @@ const Emprestimo = sequelize.define('Emprestimo', {
     allowNull: true
   },
   status: {
-    type: DataTypes.ENUM('aberto', 'devolvido', 'atrasado'),
-    defaultValue: 'aberto'
+    type: DataTypes.ENUM('Em aberto', 'Devolvido', 'Atrasado'),
+    defaultValue: 'Em aberto'
   }
 });
 
-// Relacionamentos
+// Relacionamentos ATUALIZADOS
 Emprestimo.belongsTo(Leitor, { foreignKey: 'leitorId' });
-Emprestimo.belongsTo(Livro, { foreignKey: 'livroId' });
+
+// Relação Muitos-para-Muitos: Um empréstimo tem vários livros, e um livro pode estar em vários empréstimos (histórico)
+Emprestimo.belongsToMany(Livro, { through: 'EmprestimoLivros', foreignKey: 'emprestimoId' });
+Livro.belongsToMany(Emprestimo, { through: 'EmprestimoLivros', foreignKey: 'livroId' });
 
 module.exports = Emprestimo;

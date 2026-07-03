@@ -8,57 +8,45 @@ const auth = require('../middlewares/auth');
 // Consultas
 // ==========================
 
-// Buscar por nome ou CPF
 router.get(
   '/buscar',
-  auth(['Administrador', 'Bibliotecario']),
+  auth(['Administrador', 'Bibliotecário']),
   LeitorController.search
 );
 
-// Histórico de empréstimos do leitor
 router.get(
   '/:id/historico',
-  auth(['Administrador', 'Bibliotecario']),
+  auth(['Administrador', 'Bibliotecário', 'Leitor']),
   LeitorController.historico
 );
 
-// Buscar leitor por ID
 router.get(
   '/:id',
-  auth(['Administrador', 'Bibliotecario']),
+  auth(['Administrador', 'Bibliotecário']),
   LeitorController.getById
 );
 
-// Listar todos os leitores
 router.get(
   '/',
-  auth(['Administrador', 'Bibliotecario']),
+  auth(['Administrador', 'Bibliotecário']),
   LeitorController.getAll
 );
 
 // ==========================
-// Cadastro
+// Cadastro, Atualização e Inativação
 // ==========================
 
 router.post(
   '/',
-  auth(['Administrador', 'Bibliotecario']),
+  auth(['Administrador', 'Bibliotecário']),
   LeitorController.create
 );
 
-// ==========================
-// Atualização
-// ==========================
-
 router.put(
   '/:id',
-  auth(['Administrador', 'Bibliotecario']),
+  auth(['Administrador', 'Bibliotecário']),
   LeitorController.update
 );
-
-// ==========================
-// Inativação
-// ==========================
 
 router.patch(
   '/:id/inativar',

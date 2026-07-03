@@ -8,44 +8,43 @@ const auth = require('../middlewares/auth');
 // Consultas
 // ======================================
 
-// Buscar por status
 router.get(
     '/buscar',
-    auth(['Administrador', 'Bibliotecario']),
+    auth(['Administrador', 'Bibliotecário']),
     EmprestimoController.search
 );
 
-// Buscar empréstimo por ID
+router.get(
+    '/meus',
+    auth(['Leitor']),
+    EmprestimoController.meusEmprestimos
+);
+
 router.get(
     '/:id',
-    auth(['Administrador', 'Bibliotecario']),
+    auth(['Administrador', 'Bibliotecário']),
     EmprestimoController.getById
 );
 
-// Listar todos
 router.get(
     '/',
-    auth(['Administrador', 'Bibliotecario']),
+    auth(['Administrador', 'Bibliotecário']),
     EmprestimoController.getAll
 );
 
 // ======================================
-// Cadastro
+// Cadastro e Devolução
 // ======================================
 
 router.post(
     '/',
-    auth(['Administrador', 'Bibliotecario']),
+    auth(['Administrador', 'Bibliotecário']),
     EmprestimoController.create
 );
 
-// ======================================
-// Registrar devolução
-// ======================================
-
 router.put(
     '/:id/devolver',
-    auth(['Administrador', 'Bibliotecario']),
+    auth(['Administrador', 'Bibliotecário']),
     EmprestimoController.devolver
 );
 

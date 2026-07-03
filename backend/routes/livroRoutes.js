@@ -8,50 +8,39 @@ const auth = require('../middlewares/auth');
 // Consultas
 // ==========================
 
-// Buscar por filtros (deve vir antes de /:id)
 router.get(
   '/buscar',
-  auth(['Administrador', 'Bibliotecario', 'Leitor']),
+  auth(['Administrador', 'Bibliotecário', 'Leitor']),
   LivroController.search
 );
 
-// Listar todos
 router.get(
   '/',
-  auth(['Administrador', 'Bibliotecario', 'Leitor']),
+  auth(['Administrador', 'Bibliotecário', 'Leitor']),
   LivroController.getAll
 );
 
-// Buscar por ID
 router.get(
   '/:id',
-  auth(['Administrador', 'Bibliotecario', 'Leitor']),
+  auth(['Administrador', 'Bibliotecário', 'Leitor']),
   LivroController.getById
 );
 
 // ==========================
-// Cadastro
+// Cadastro, Atualização e Exclusão
 // ==========================
 
 router.post(
   '/',
-  auth(['Administrador', 'Bibliotecario']),
+  auth(['Administrador', 'Bibliotecário']),
   LivroController.create
 );
 
-// ==========================
-// Atualização
-// ==========================
-
 router.put(
   '/:id',
-  auth(['Administrador', 'Bibliotecario']),
+  auth(['Administrador', 'Bibliotecário']),
   LivroController.update
 );
-
-// ==========================
-// Exclusão
-// ==========================
 
 router.delete(
   '/:id',
