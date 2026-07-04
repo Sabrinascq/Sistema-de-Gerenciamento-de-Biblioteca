@@ -32,4 +32,4 @@
 - **Leitor 2:** [leitor2@email.com / 1234]
 
 ## Link para o Vídeo da Apresentação
-[...]
+[(https://drive.google.com/file/d/1rRZtL8e8rSUHI5XJxAVUuENzvM6vGcJa/view?usp=sharing)]
