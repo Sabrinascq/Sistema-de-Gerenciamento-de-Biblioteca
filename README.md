@@ -18,7 +18,7 @@
 ## Passo a Passo para Instalação e Execução
 1. Clone o repositório: `git clone [https://github.com/Sabrinascq/Sistema-de-Gerenciamento-de-Biblioteca.git]`
 2. Certifique-se de que o Docker Desktop esteja instalado e em execução na sua máquina.
-3. Pelo terminal, acesse a pasta raiz do projeto clonado.
+3. Pelo terminal, acesse a pasta raiz do projeto clonado, digitando 'cd Sistema-de-Gerenciamento-de-Biblioteca'.
 4. Inicie os containers do banco de dados, backend e frontend com o comando: docker-compose up --build
 5. Aguarde a finalização do terminal (os links ficarão azuis).
 6. Acesse a interface do sistema no navegador: http://localhost:5173
